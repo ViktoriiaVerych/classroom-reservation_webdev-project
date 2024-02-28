@@ -1,0 +1,11 @@
+extends layout.pug
+
+block append content
+  h1 Classroom List
+  ul.classrooms
+    each classroom in classrooms
+      li
+        h2(classroom.name || 'Unnamed Classroom')
+        p Capacity: #{classroom.capacity || 'Not specified'}
+        p Resources: #{classroom.resources.join(', ') || 'None'}
+        a(href=`/classrooms/reserve/${classroom._id.toString()}`) Reserve

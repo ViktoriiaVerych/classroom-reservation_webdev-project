@@ -1,0 +1,92 @@
+/* Reset some basic elements */
+html, body, ul, li, h1, h2, p, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Simple styles for the body and main content area */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+main {
+    padding-top: 20px;
+}
+
+/* Header and navigation styles */
+header {
+    background: var(--header-background-color);
+    color: var(--header-text-color);
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Style for the form elements */
+form .form-group {
+    margin-bottom: 10px;
+}
+
+form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form .form-group input {
+    max-width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Button styling */
+button, input[type="submit"] {
+    background: var(--button-background-color);
+    color: var(--button-text-color);
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background: var(--button-hover-background-color);
+}
+
+/* Footer styles */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Utility classes */
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
