@@ -1,82 +1,67 @@
-const ClassroomModel = require('../models/classroom');
+const Classroom = require('../models/classroom');
 
-async function getAllClassrooms(req, res) {
+// List all classrooms
+exports.listAllClassrooms = async (req, res) => {
     try {
-        const classrooms = await ClassroomModel.find();
-        console.log(classrooms);
-        res.render('classroom-archive', { classrooms: classrooms });
+        const classrooms = await Classroom.find();
+        res.status(200).json(classrooms);
     } catch (error) {
-        console.error('Error fetching classrooms:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send({ message: error.message });
     }
-}
+};
 
-async function createClassroom(req, res) {
+// Get a specific classroom by ID
+exports.getClassroomById = async (req, res) => {
     try {
-        const name = req.body.name;
-        const capacity = req.body.capacity;
-        const resources = req.body.resources; // Assuming this is an array of strings or objects
-        const newClassroom = new ClassroomModel({ name, capacity, resources });
-        await newClassroom.save();
-        res.redirect('/classrooms/' + newClassroom._id);
+        const classroom = await Classroom.findById(req.params.id);
+        if (!classroom) {
+            return res.status(404).send({ message: 'Classroom not found' });
+        }
+        res.status(200).json(classroom);
     } catch (error) {
-        console.error('Error creating classroom:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send({ message: error.message });
     }
-}
+};
 
-async function displayClassroom(req, res) {
+// Create a new classroom
+exports.createClassroom = async (req, res) => {
+    const classroom = new Classroom({
+        name: req.body.name,
+        capacity: req.body.capacity,
+        location: req.body.location,
+        equipment: req.body.equipment,
+    });
+
     try {
-        const classroom = await ClassroomModel.findById(req.params.id);
-        res.render('display-classroom', { classroom });
+        const newClassroom = await classroom.save();
+        res.status(201).json(newClassroom);
     } catch (error) {
-        console.error('Error displaying classroom:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(400).send({ message: error.message });
     }
-}
+};
 
-async function deleteClassroom(req, res) {
+// Update an existing classroom
+exports.updateClassroom = async (req, res) => {
     try {
-        const id = req.params.id;
-        await ClassroomModel.findByIdAndDelete(id);
-        res.redirect('/classrooms');
+        const classroom = await Classroom.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!classroom) {
+            return res.status(404).send({ message: 'Classroom not found' });
+        }
+        res.status(200).json(classroom);
     } catch (error) {
-        console.error('Error deleting classroom:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send({ message: error.message });
     }
-}
+};
 
-async function updateClassroom(req, res) {
+// Delete a classroom
+exports.deleteClassroom = async (req, res) => {
     try {
-        const id = req.params.id;
-        const updatedData = {
-            name: req.body.name,
-            capacity: req.body.capacity,
-            resources: req.body.resources 
-        };
-        await ClassroomModel.findByIdAndUpdate(id, updatedData);
-        res.redirect('/classrooms/' + id);
+        const classroom = await Classroom.findByIdAndDelete(req.params.id);
+        if (!classroom) {
+            return res.status(404).send({ message: 'Classroom not found' });
+        }
+        res.status(200).send({ message: 'Classroom deleted successfully' });
     } catch (error) {
-        console.error('Error updating classroom:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send({ message: error.message });
     }
-}
-
-async function getUpdateClassroomPage(req, res) {
-    try {
-        const classroom = await ClassroomModel.findById(req.params.id);
-        res.render('update-classroom', { classroom });
-    } catch (error) {
-        console.error('Error fetching classroom for update:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-}
-
-module.exports = {
-    getAllClassrooms,
-    createClassroom,
-    displayClassroom,
-    deleteClassroom,
-    updateClassroom,
-    getUpdateClassroomPage
 };

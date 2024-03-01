@@ -1,29 +1,22 @@
 const NodeCache = require('node-cache');
-const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+const myCache = new NodeCache({ stdTTL: 100, checkperiod: 120 }); // TTL in seconds
 
 // Set data in cache
-function setCache(key, value) {
-    return cache.set(key, value);
-}
+exports.setCache = (key, value) => {
+    return myCache.set(key, value);
+};
 
 // Get data from cache
-function getCache(key) {
-    return cache.get(key);
-}
+exports.getCache = (key) => {
+    return myCache.get(key);
+};
 
-// Delete data from cache
-function deleteCache(key) {
-    return cache.del(key);
-}
+// Delete specific data from cache
+exports.deleteCache = (key) => {
+    return myCache.del(key);
+};
 
-// Flush all data from cache
-function flushCache() {
-    return cache.flushAll();
-}
-
-module.exports = {
-    setCache,
-    getCache,
-    deleteCache,
-    flushCache
+// Clear the entire cache
+exports.clearCache = () => {
+    return myCache.flushAll();
 };

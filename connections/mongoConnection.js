@@ -1,17 +1,10 @@
 const mongoose = require('mongoose');
-const dbString = require('../configs/dbConfig');
-const winston = require('winston');
 
-const connection = () => {
-    mongoose.connect(dbString, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(() => {
-            winston.info('Connected to MongoDB');
-        })
-        .catch((error) => {
-            winston.error('MongoDB connection error:', error);
-        });
-};
+const mongoDB = 'mongodb+srv://vverych:<password>@cluster0.h8qreby.mongodb.net/';
+mongoose.connect(mongoDB);
 
-module.exports = {
-    connect: connection
-};
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function() {
+    console.log('Connected to MongoDB');
+});

@@ -1,11 +1,27 @@
-extends layout.pug
-
-block append content
-  h1 Classroom List
-  ul.classrooms
-    each classroom in classrooms
-      li
-        h2(classroom.name || 'Unnamed Classroom')
-        p Capacity: #{classroom.capacity || 'Not specified'}
-        p Resources: #{classroom.resources.join(', ') || 'None'}
-        a(href=`/classrooms/reserve/${classroom._id.toString()}`) Reserve
+//extends layout.pug
+//
+//block content
+//  h1 Classroom List
+//  ul.classrooms
+//    each classroom in classrooms
+//      li
+//        h2= classroom.name
+//        p Capacity: #{classroom.capacity}
+//        p Resources: #{classroom.resources.join(', ')}
+//        a(href=`/classrooms/reserve/${classroom._id}`) Reserve
+doctype html
+html
+  head
+    title Classroom List
+    link(rel='stylesheet', href='/css/style_classroomList.css')
+  body
+    header
+      h1 Available Classrooms
+    .classrooms-container
+      if classrooms.length
+        ul
+          each classroom in classrooms
+            li
+              a(href=`/api/classrooms/${classroom._id}`) #{classroom.name} - Capacity: #{classroom.capacity}
+      else
+        p No classrooms available.

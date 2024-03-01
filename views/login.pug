@@ -1,28 +1,30 @@
-//- extends layout.pug
-
-//- block content
-//-   h1 Login
-//-   form(method='POST', action='/login')
-//-     .form-group
-//-       label(for='email') Email:
-//-       input#email(type='email', name='email', required=true)
-//-     .form-group
-//-       label(for='password') Password:
-//-       input#password(type='password', name='password', required=true)
-//-     .form-group
-//-       button(type='submit') Login
-
-
-extends layout.pug
-
-block content
-  h1 Login
-  form(method='POST', action='/login')
-    .form-group
-      label(for='email', aria-label='Email') Email:
-      input#email(type='email', name='email', required=true, autofocus)
-    .form-group
-      label(for='password', aria-label='Password') Password:
-      input#password(type='password', name='password', required=true, autocomplete='off', placeholder='Enter your password')
-    .form-group
-      button(type='submit') Login
+//extends layout.pug
+//
+//block content
+//  h1 Login
+//  form(method='POST', action='/login')
+//    .form-group
+//      label(for='email') Email:
+//      input#email(type='email', name='email', required=true)
+//    .form-group
+//      label(for='password') Password:
+//      input#password(type='password', name='password', required=true)
+//    .form-group
+//      button(type='submit') Login
+doctype html
+html
+  head
+    title Login
+    link(rel='stylesheet', href='/css/style_login.css')
+  body
+    .login-container
+      h1 Login to Your Account
+      form(action='/api/users/login', method='POST')
+        .form-group
+              label(for='email') Email:
+              input#email(type='email', name='email', required=true)
+            .form-group
+              label(for='password') Password:
+              input#password(type='password', name='password', required=true)
+            .form-group
+              button(type='submit') Login
