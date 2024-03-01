@@ -1,25 +1,34 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const saltRounds = 10;
-const jwtSecret = process.env.JWT_SECRET || 'your_secret_key'; // Should be in an environment variable
+const saltRounds = 12; 
+const jwtSecret = process.env.JWT_SECRET; 
 
-// Hash password
+if (!jwtSecret) {
+    throw new Error('JWT secret key is not provided');
+}
+
+//hasing algorithm
 exports.hashPassword = async (password) => {
     return await bcrypt.hash(password, saltRounds);
 };
 
-// Compare password
+//comparing 
 exports.comparePassword = async (password, hash) => {
     return await bcrypt.compare(password, hash);
 };
 
-// Generate JWT token
+//generateJWT 
 exports.generateToken = (user) => {
-    return jwt.sign({ id: user._id, role: user.role }, jwtSecret, { expiresIn: '24h' });
+    return jwt.sign({ id: user._id, role: user.role, email: user.email, name: user.name }, jwtSecret, { expiresIn: '7d' }); 
 };
 
-// Verify JWT token
+//verify JWT 
 exports.verifyToken = (token) => {
-    return jwt.verify(token, jwtSecret);
+    try {
+        return jwt.verify(token, jwtSecret);
+    } catch (error) {
+        console.error('Error verifying token:', error);
+        throw new Error('Invalid token');
+    }
 };

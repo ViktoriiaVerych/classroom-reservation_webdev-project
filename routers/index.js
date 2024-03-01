@@ -8,12 +8,12 @@ const userRoutes = require('./routers/userRoutes');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Use routes
+//routes
 app.use('/api/classrooms', classroomRoutes);
 app.use('/api/reservations', reservationRoutes);
 app.use('/api/users', userRoutes);
 
-// Basic route for testing
+//test routes
 app.get('/', (req, res) => {
     res.send('Welcome to the University Classroom Reservation System');
 });

@@ -2,16 +2,16 @@ const { google } = require('googleapis');
 const calendar = google.calendar('v3');
 const { OAuth2 } = google.auth;
 
-const calendarId = process.env.CALENDAR_ID; // Google Calendar ID, store in an environment variable
-const clientId = process.env.CLIENT_ID; // Google API client ID
-const clientSecret = process.env.CLIENT_SECRET; // Google API client secret
-const redirectUri = process.env.REDIRECT_URI; // Redirect URI for OAuth2
-const refreshToken = process.env.REFRESH_TOKEN; // Refresh token for OAuth2
+const calendarId = process.env.CALENDAR_ID;
+const clientId = process.env.CLIENT_ID; 
+const clientSecret = process.env.CLIENT_SECRET; 
+const redirectUri = process.env.REDIRECT_URI; 
+const refreshToken = process.env.REFRESH_TOKEN; 
 
 const oauth2Client = new OAuth2(clientId, clientSecret, redirectUri);
 oauth2Client.setCredentials({ refresh_token: refreshToken });
 
-// Add event to Google Calendar
+//adding the event to the google calendar
 exports.addEvent = async (event) => {
     return calendar.events.insert({
         auth: oauth2Client,
@@ -20,7 +20,7 @@ exports.addEvent = async (event) => {
     });
 };
 
-// Update event in Google Calendar
+//updating the event to the google calendar
 exports.updateEvent = async (eventId, event) => {
     return calendar.events.update({
         auth: oauth2Client,
@@ -30,7 +30,7 @@ exports.updateEvent = async (eventId, event) => {
     });
 };
 
-// Delete event from Google Calendar
+//updating the event to the google calendar
 exports.deleteEvent = async (eventId) => {
     return calendar.events.delete({
         auth: oauth2Client,

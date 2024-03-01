@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Password hashing middleware
+//password hashing middleware
 userSchema.pre('save', async function(next) {
     if (this.isModified('password') || this.isNew) {
         const salt = await bcrypt.genSalt(10);
@@ -28,7 +28,7 @@ userSchema.pre('save', async function(next) {
     next();
 });
 
-// Method to compare password for login
+//comparing passwords for login
 userSchema.methods.comparePassword = async function(candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
 };

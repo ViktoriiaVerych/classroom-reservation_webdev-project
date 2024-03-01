@@ -1,4 +1,3 @@
-
 // const express = require('express');
 // const connectDB = require('./connections/mongoConnection');
 // const appRoutes = require('./routes/index');
@@ -22,7 +21,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-// Import routes
+//importing the routes
 const classroomRoutes = require('./routers/classroomRoutes');
 const reservationRoutes = require('./routers/reservationRoutes');
 const userRoutes = require('./routers/userRoutes');
@@ -30,21 +29,21 @@ const userRoutes = require('./routers/userRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+//middleware
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve static files
+app.use(express.static('public')); 
 
-// Database connection
+//database connection establishment
 mongoose.connect('mongodb://localhost/classroomReservation', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
-// Use routes
+//routes usage
 app.use('/api/classrooms', classroomRoutes);
 app.use('/api/reservations', reservationRoutes);
 app.use('/api/users', userRoutes);
 
-// Start server
+//running the server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

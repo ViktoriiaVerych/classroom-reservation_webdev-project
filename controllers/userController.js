@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const UserModel = require('../models/user');
 
-// Register a new user
+//register a new user
 async function createUser(req, res) {
     try {
         const { username, email, password } = req.body;
@@ -17,7 +17,7 @@ async function createUser(req, res) {
     }
 }
 
-// Get all users
+//get the list of users
 async function getAllUsers(req, res) {
     try {
         const users = await UserModel.find();
@@ -28,7 +28,7 @@ async function getAllUsers(req, res) {
     }
 }
 
-// Get a single user by id
+//get user by id
 async function getUserById(req, res) {
     try {
         const user = await UserModel.findById(req.params.id);
@@ -42,7 +42,7 @@ async function getUserById(req, res) {
     }
 }
 
-// Update a user's details
+//to update uses info
 async function updateUser(req, res) {
     try {
         const { username, email } = req.body;
@@ -57,7 +57,7 @@ async function updateUser(req, res) {
     }
 }
 
-// Delete a user
+//delete the user
 async function deleteUser(req, res) {
     try {
         const user = await UserModel.findByIdAndDelete(req.params.id);
@@ -71,7 +71,7 @@ async function deleteUser(req, res) {
     }
 }
 
-// Export the controller functions
+//exxporting the controller functions
 module.exports = {
     createUser,
     getAllUsers,

@@ -1,14 +1,9 @@
-// Error handler middleware
+//error handler middleware
 import app from "express/lib/router";
-
 app.use((err, req, res, next) => {
-    // Log the error internally
+    //logging the error internally
     console.error(err);
-
-    // Set the response status code
-    const statusCode = err.statusCode || 500; // Defaults to 500 if statusCode not set
-
-    // Send a generic message or a specific message if defined
+    const statusCode = err.statusCode || 500;
     res.status(statusCode).json({
         message: err.message || 'An unexpected error occurred on the server.',
     });

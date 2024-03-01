@@ -1,6 +1,6 @@
 const Classroom = require('../models/classroom');
 
-// List all classrooms
+// to  lsit all the classrooms
 exports.listAllClassrooms = async (req, res) => {
     try {
         const classrooms = await Classroom.find();
@@ -10,7 +10,7 @@ exports.listAllClassrooms = async (req, res) => {
     }
 };
 
-// Get a specific classroom by ID
+//get class by id
 exports.getClassroomById = async (req, res) => {
     try {
         const classroom = await Classroom.findById(req.params.id);
@@ -23,7 +23,7 @@ exports.getClassroomById = async (req, res) => {
     }
 };
 
-// Create a new classroom
+//create a new classroom
 exports.createClassroom = async (req, res) => {
     const classroom = new Classroom({
         name: req.body.name,
@@ -40,7 +40,7 @@ exports.createClassroom = async (req, res) => {
     }
 };
 
-// Update an existing classroom
+//update an existing classroom
 exports.updateClassroom = async (req, res) => {
     try {
         const classroom = await Classroom.findByIdAndUpdate(req.params.id, req.body, { new: true });

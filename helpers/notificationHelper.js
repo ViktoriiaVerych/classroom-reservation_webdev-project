@@ -1,21 +1,21 @@
 const nodemailer = require('nodemailer');
 
-// Email transport configuration
+//email trans
 const transporter = nodemailer.createTransport({
-    service: 'gmail', // Use Gmail; for other services, configuration might differ
+    service: 'gmail', 
     auth: {
-        user: process.env.EMAIL_USERNAME, // Email account username
-        pass: process.env.EMAIL_PASSWORD, // Email account password
+        user: process.env.EMAIL_USERNAME, 
+        pass: process.env.EMAIL_PASSWORD,
     },
 });
 
-// Send an email
+//seend an email
 exports.sendEmail = async (to, subject, text, html) => {
     const mailOptions = {
-        from: process.env.EMAIL_USERNAME, // Sender address
-        to: to, // List of recipients
-        subject: subject, // Subject line
-        text: text, // Plain text body
+        from: process.env.EMAIL_USERNAME, //sender
+        to: to, //accepter
+        subject: subject, // 
+        text: text,
         html: html, // HTML body
     };
 
@@ -25,6 +25,6 @@ exports.sendEmail = async (to, subject, text, html) => {
         return info;
     } catch (error) {
         console.error('Error sending email: ', error);
-        throw error; // Rethrow the error to be handled by the caller
+        throw error; 
     }
 };

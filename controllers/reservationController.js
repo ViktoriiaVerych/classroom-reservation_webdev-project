@@ -1,6 +1,6 @@
 const Reservation = require('../models/reservation');
 
-// List all reservations
+//to list all reservations
 exports.listAllReservations = async (req, res) => {
     try {
         const reservations = await Reservation.find().populate('classroom', 'name location');
@@ -10,7 +10,7 @@ exports.listAllReservations = async (req, res) => {
     }
 };
 
-// Get a specific reservation by ID
+//get reserv by id
 exports.getReservationById = async (req, res) => {
     try {
         const reservation = await Reservation.findById(req.params.id).populate('classroom', 'name location');
@@ -23,7 +23,7 @@ exports.getReservationById = async (req, res) => {
     }
 };
 
-// Create a new reservation
+//to create a new reserv
 exports.createReservation = async (req, res) => {
     const reservation = new Reservation({
         user: req.body.user,
@@ -41,7 +41,7 @@ exports.createReservation = async (req, res) => {
     }
 };
 
-// Update an existing reservation
+//update an existing reserv
 exports.updateReservation = async (req, res) => {
     try {
         const reservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -54,7 +54,7 @@ exports.updateReservation = async (req, res) => {
     }
 };
 
-// Delete a reservation
+//delete the reserv
 exports.deleteReservation = async (req, res) => {
     try {
         const reservation = await Reservation.findByIdAndDelete(req.params.id);
