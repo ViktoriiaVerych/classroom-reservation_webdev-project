@@ -22,9 +22,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 //importing the routes
-const classroomRoutes = require('./routers/classroomRoutes');
-const reservationRoutes = require('./routers/reservationRoutes');
-const userRoutes = require('./routers/userRoutes');
+const classroomRoutes = require('./routes/classroomRoutes');
+const reservationRoutes = require('./routes/reservationRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

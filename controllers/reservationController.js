@@ -25,13 +25,12 @@ exports.getReservationById = async (req, res) => {
 
 //to create a new reserv
 exports.createReservation = async (req, res) => {
-    const reservation = new Reservation({
-        user: req.body.user,
-        classroom: req.body.classroom,
-        startTime: req.body.startTime,
-        endTime: req.body.endTime,
-        status: req.body.status,
-    });
+    const reservation = new Reservation();
+    reservation.user = req.body.user;
+    reservation.classroom = req.body.classroom;
+    reservation.startTime = req.body.startTime;
+    reservation.endTime = req.body.endTime;
+    reservation.status = req.body.status;
 
     try {
         const newReservation = await reservation.save();
