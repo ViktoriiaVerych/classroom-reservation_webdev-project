@@ -17,6 +17,7 @@ const classroomSchema = new mongoose.Schema({
     equipment: [{
         type: String
     }]
+    
 });
 
 module.exports = mongoose.model('Classroom', classroomSchema);
