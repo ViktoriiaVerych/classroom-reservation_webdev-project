@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const connectDB = require("./mongoConnection");
 
-// Импорт маршрутов
+// імпорт маршрутів
 const classroomRoutes = require("./routes/classroomRoutes");
 const reservationRoutes = require("./routes/reservationRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -13,17 +13,17 @@ const reservation = require("./models/reservation");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Промежуточное ПО
+
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
 app.set("view engine", "pug");
-// Использование маршрутов
+// використання маршрутів
 app.use("/api/classrooms", classroomRoutes);
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/users", userRoutes);
 
-// Запуск сервера
+// Запуск 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
